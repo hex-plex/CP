@@ -44,7 +44,7 @@ int main()
     cin.tie(NULL);
     int m,n,i,j,k,r;
     cin>>m>>n>>r;
-    int a[m][n];
+    int a[m][n],a1[m][n];
     for(i=0;i<m;i++)
     {
         for(j=0;j<n;j++)
@@ -53,16 +53,15 @@ int main()
         }
     }
 
-    vector<rl> tempo;
+
     rl* toprl;
-    for(i=0;i<1;i++)
+    for(i=0;i<m/2;i++)
     {
         rl* temp;
         rl* prev=temp;
         int top=1;
         for(k=i;k<(m-i-1);k++)
         {
-
             temp = new rl;
             (*temp).poi=prev;
             (*temp).val=a[k][i];
@@ -72,16 +71,15 @@ int main()
                 toprl = temp;
             }
             prev = temp;
-            cout<<(*temp).val<<" ";
+            //cout<<(*temp).val<<" ";
         }
 
         for(j=i;j<n-i;j++)
         {
             temp = new rl;
-
             (*temp).poi=prev;
             (*temp).val=a[m-i-1][j];
-            cout<<(*temp).val<<" ";
+            //cout<<(*temp).val<<" ";
             prev = temp;
         }
         j--;
@@ -91,8 +89,7 @@ int main()
             (*temp).poi=prev;
             (*temp).val=a[k][j];
             prev = temp;
-            cout<<(*temp).val<<" ";
-
+            //cout<<(*temp).val<<" ";
         }
 
         for(;j>i;j--)
@@ -100,28 +97,52 @@ int main()
             temp = new rl;
             (*temp).poi=prev;
             (*temp).val=a[i][j];
-
-
             prev = temp;
-            cout<<(*temp).val<<" ";
-
-        }
+            //cout<<(*temp).val<<" ";
+            }
 
         (*toprl).poi=prev;
-        cout<<(*toprl).val;
-        cout<<"\n";
+        //cout<<(*toprl).val;
+        int perimeter = max(2*(m+n-(2*i))-4,1);
+        int rr = r%perimeter;
+        while(rr--)
+        {
+            toprl = (*toprl).poi;
+        }
+        rl* it = toprl;
+        for(j=i;j<n-i;j++)
+        {
+            a1[i][j]=(*it).val;
+            it=(*it).poi;
+        }
+        j--;
+        for(k=i+1;k<m-i;k++)
+        {
+            a1[k][j]=(*it).val;
+            it=(*it).poi;
+        }
+        for(j--;j>i;j--)
+        {
+            a1[m-1-i][j]=(*it).val;
+            it=(*it).poi;
+        }
+        for(k--;k>i;k--)
+        {
+            a1[k][j]=(*it).val;
+            it=(*it).poi;
+        }
+
+        //cout<<"\n";
     }
     //for_each(all(tempo),pri);
-
-    cout<<"\n";
-
-    rl* it = (*toprl).poi ;
-    while(it!=toprl)
+    for(i=0;i<m;i++)
     {
-        cout<<(*it).val<<" ";
-        it = (*it).poi;
+        for(j=0;j<n;j++)
+        {
+            cout<<a1[i][j]<<" ";
+        }
+        cout<<"\n";
     }
-    cout<<(*it).val;
     return 0;
 
 }
