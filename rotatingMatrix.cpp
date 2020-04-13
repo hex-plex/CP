@@ -60,53 +60,53 @@ int main()
         rl* temp;
         rl* prev=temp;
         int top=1;
-
-        for(j=i;j<n-i;j++)
+        for(k=i;k<(m-i-1);k++)
         {
+
             temp = new rl;
+            (*temp).poi=prev;
+            (*temp).val=a[k][i];
             if(top==1)
             {
                 top=0;
                 toprl = temp;
             }
-            (*temp).poi=prev;
-            (*temp).val=a[i][j];
-
-            prev = temp;
-        }
-
-
-        j--;
-
-        for(k=i+1;k<(m-i);k++)
-        {
-            temp = new rl;
-            (*temp).poi=prev;
-            (*temp).val=a[k][n-j];
-
             prev = temp;
             cout<<(*temp).val<<" ";
         }
 
-
-        for(j--;j>i;j--)
+        for(j=i;j<n-i;j++)
         {
             temp = new rl;
+
             (*temp).poi=prev;
-            (*temp).val=a[m-1-i][j];
-
-
+            (*temp).val=a[m-i-1][j];
+            cout<<(*temp).val<<" ";
             prev = temp;
-
         }
+        j--;
         for(k--;k>i;k--)
         {
             temp = new rl;
             (*temp).poi=prev;
             (*temp).val=a[k][j];
             prev = temp;
+            cout<<(*temp).val<<" ";
 
         }
+
+        for(;j>i;j--)
+        {
+            temp = new rl;
+            (*temp).poi=prev;
+            (*temp).val=a[i][j];
+
+
+            prev = temp;
+            cout<<(*temp).val<<" ";
+
+        }
+
         (*toprl).poi=prev;
         cout<<(*toprl).val;
         cout<<"\n";
