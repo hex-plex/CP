@@ -26,7 +26,7 @@ using namespace std;
 
 
 struct rl{
-int val;
+ll val;
 rl * poi;
 };
 
@@ -44,7 +44,7 @@ int main()
     cin.tie(NULL);
     int m,n,i,j,k,r;
     cin>>m>>n>>r;
-    int a[m][n],a1[m][n];
+    ll a[m][n];
     for(i=0;i<m;i++)
     {
         for(j=0;j<n;j++)
@@ -103,7 +103,7 @@ int main()
 
         (*toprl).poi=prev;
         //cout<<(*toprl).val;
-        int perimeter = max(2*(m+n-(2*i))-4,1);
+        int perimeter = max(2*(n+m-4*i)-4,2);
         int rr = r%perimeter;
         while(rr--)
         {
@@ -112,34 +112,35 @@ int main()
         rl* it = toprl;
         for(j=i;j<n-i;j++)
         {
-            a1[i][j]=(*it).val;
+            a[i][j]=(*it).val;
             it=(*it).poi;
         }
         j--;
         for(k=i+1;k<m-i;k++)
         {
-            a1[k][j]=(*it).val;
+            a[k][j]=(*it).val;
             it=(*it).poi;
         }
         for(j--;j>i;j--)
         {
-            a1[m-1-i][j]=(*it).val;
+            a[m-1-i][j]=(*it).val;
             it=(*it).poi;
         }
         for(k--;k>i;k--)
         {
-            a1[k][j]=(*it).val;
+            a[k][j]=(*it).val;
             it=(*it).poi;
         }
 
         //cout<<"\n";
     }
     //for_each(all(tempo),pri);
+
     for(i=0;i<m;i++)
     {
         for(j=0;j<n;j++)
         {
-            cout<<a1[i][j]<<" ";
+            cout<<a[i][j]<<" ";
         }
         cout<<"\n";
     }
